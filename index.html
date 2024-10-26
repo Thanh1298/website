@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Thiệu - Khoa CNTT - Đại Học Nông Lâm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black;
+            background-color: #f0f0f0;
+        }
+        nav {
+            background-color: rgba(0, 55, 255, 0.9);
+            color: black;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+        }
+        nav ul li {
+            margin: 0 25px;
+        }
+        nav ul li a {
+            color: black;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: rgba(249, 5, 5, 0.904);
+            color: white;
+        }
+        .tab-content {
+            background-color: white;
+            padding: 20px;
+            height: calc(100vh - 50px);
+            overflow-y: auto;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        #home {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: calc(100vh - 50px);
+            background-color: #ffffff; /* Màu nền cho phần Home */
+        }
+        h1 {
+            color: #e74c3c; /* Màu đỏ cho h1 */
+        }
+        h2 {
+            color: #3498db; /* Màu xanh lam cho h2 */
+        }
+        h3 {
+            color: #2ecc71; /* Màu xanh lá cho h3 */
+        }
+        h4 {
+            color: #f39c12; /* Màu vàng cho h4 */
+        }
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        table, th, td {
+            border: 1px solid #ccc; /* Đổi màu đường viền bảng */
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .profile-info {
+            background-color: rgba(0, 0, 0, 0.7); /* Nền mờ */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            color: white; /* Màu chữ trắng */
+        }
+        .profile-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+        .profile-img {
+            width: 120px; /* Kích thước lớn hơn */
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #cf0606;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        .profile-img:hover {
+            transform: scale(1.1); /* Hiệu ứng phóng to khi di chuột */
+        }
+        .about-section {
+            background-image: url('https://images.pexels.com/photos/3408741/pexels-photo-3408741.jpeg?auto=compress&cs=tinysrgb&w=600'); /* Hình nền */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: white;
+            padding: 20px;
+        }
+        footer {
+            background-color: lightgray;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .lab-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .lab-list li {
+            margin: 10px;
+            text-align: center;
+        }
+        .exercise-img {
+            width: 50px; /* Kích thước hình ảnh */
+            cursor: pointer; /* Con trỏ khi di chuột */
+            transition: transform 0.3s, box-shadow 0.3s; /* Hiệu ứng chuyển tiếp */
+        }
+        .exercise-img.animated:hover {
+            transform: scale(1.5); /* Phóng to hình ảnh khi di chuột */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Hiệu ứng bóng khi di chuột */
+        }
+        .lab-tab-content {
+            display: none; /* Ẩn các tab lab */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            background-color: rgba(255, 255, 255, 0.8); /* Nền trắng mờ */
+            backdrop-filter: blur(10px); /* Làm mờ nền */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .lab-tab-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Thêm hiệu ứng nền cho lab */
+        .lab-tab-content:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGxhbXAlMjBuYXZpdGllfGVufDB8fHx8MTY5NjU2NTc2Nw&ixlib=rb-1.2.1&q=80&w=1080');
+            background-size: cover;
+            color: white; /* Đổi màu chữ */
+            padding: 20px; /* Thêm padding */
+        }
+        .lab-tab-content:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1527336481512-dc172234ee0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDV8fGxhbXAlMjBuYXZpdGllfGVufDB8fHx8MTY5NjU2NTc2Nw&ixlib=rb-1.2.1&q=80&w=1080');
+            background-size: cover;
+            color: white; /* Đổi màu chữ */
+            padding: 20px; /* Thêm padding */
+        }
+        .lab-tab-content:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1498050108023-c524d8e1e4d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fGxhbXAlMjBuYXZpdGllfGVufDB8fHx8MTY5NjU2NTc2Nw&ixlib=rb-1.2.1&q=80&w=1080');
+            background-size: cover;
+            color: white; /* Đổi màu chữ */
+            padding: 20px; /* Thêm padding */
+        }
+        .lab-tab-content:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1516802273409-68526ee1bdd6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDMyfHx0YWJ8ZW58MHx8fHwxNjk2NTY1NzY3&ixlib=rb-1.2.1&q=80&w=1080');
+            background-size: cover;
+            color: white; /* Đổi màu chữ */
+            padding: 20px; /* Thêm padding */
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#home" onclick="showTab('home')">Trang chủ</a></li>
+        <li><a href="#about" onclick="showTab('about')">Giới thiệu</a></li>
+        <li><a href="#lab" onclick="showTab('lab')">Lab</a></li>
+        <li><a href="#contact" onclick="showTab('contact')">Liên Hệ</a></li>
+    </ul>
+</nav>
+
+<div id="home" class="tab-content">
+    <img src="https://fit.hcmuaf.edu.vn/data/image/Images/nhack.gif" alt="Khoa CNTT - đại học Nông Lâm" style="width: 30%; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+    <h1>Khoa Công Nghệ Thông Tin - Trường ĐH Nông Lâm TP. HCM</h1>
+    <h2>Kết Quả Tuyển Sinh & Chỉ Tiêu Qua Các Năm</h2>
+    <h3>Ngành Công Nghệ Thông Tin - Mã Ngành: NLS-7480201</h3>
+    
+    <table>
+        <tr>
+            <th>Năm</th>
+            <th>Điểm Chuẩn</th>
+            <th>Chỉ Tiêu</th>
+        </tr>
+        <tr>
+            <td>2015</td>
+            <td>20.0</td>
+            <td>210</td>
+        </tr>
+        <tr>
+            <td>2016</td>
+            <td>19.5</td>
+            <td>210</td>
+        </tr>
+        <tr>
+            <td>2017</td>
+            <td>21.0</td>
+            <td>210</td>
+        </tr>
+        <tr>
+            <td>2018</td>
+            <td>21.0</td>
+            <td>210</td>
+        </tr>
+    </table>
+
+    <h2>Giới Thiệu Chung Về Khoa Công Nghệ Thông Tin</h2>
+    <h3>Tổng Quan:</h3>
+    <p>Thành lập năm 2001 theo giấy phép số: 2052/QĐ-BGD&ĐT-TCCB ngày 27/04/2001 của Bộ Giáo Dục và Đào Tạo.</p>
+    <p>Khoa có ba bộ môn: Hệ Thống Thông Tin, Mạng Máy Tính, Công Nghệ Phần Mềm.</p>
+
+    <h3>Cơ Sở Vật Chất:</h3>
+    <img src="https://fit.hcmuaf.edu.vn/data/image/Images/Phong%20may.jpg" alt="Khoa CNTT" style="width: 50%; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+    <p>Phòng học lý thuyết đều có các máy móc thiết bị nghe nhìn: Projector, Ampli…</p>
+    <p>Phòng máy tính: Có 8 phòng máy kết nối đường Internet tốc độ cao, có hệ thống máy lạnh.</p>
+
+    <h2>Tầm Nhìn, Sứ Mệnh, Mục Tiêu Chiến Lược và Giá Trị Cốt Lõi</h2>
+    <h3>Tầm Nhìn:</h3>
+    <p>Phấn đấu (đến năm 2030) Khoa CNTT sẽ trở thành đơn vị đào tạo, nghiên cứu khoa học hàng đầu tại Việt Nam và khu vực, đặc biệt dựa trên nền tảng Java.</p>
+
+    <h3>Sứ Mệnh:</h3>
+    <p>Đào tạo nguồn nhân lực chất lượng cao trong lĩnh vực Công Nghệ Thông Tin.</p>
+
+    <h3>Mục Tiêu Chiến Lược:</h3>
+    <p>Đào tạo kỹ sư có năng lực, kỹ năng nghề nghiệp tốt, đáp ứng nhu cầu nhân lực của xã hội.</p>
+</div>
+
+<div id="about" class="tab-content about-section">
+    <h1>About Us</h1>
+    <div class="profile-info">
+        <img src="https://images.pexels.com/photos/459203/pexels-photo-459203.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Profile Image" class="profile-img">
+        <h2>Personal Information</h2>
+        <h3>Name: Nguyen Van Thanh</h3>
+        <p>Age: 19</p>
+        <p>Email: thanh2005@gmail.com</p>
+        <p>Phone: +84 347 325 512</p>
+        <p>Address: Ho Chi Minh City, Vietnam</p>
+        <p>Occupation: Software Engineer</p>
+        <p>Hobbies: Reading, Traveling, Coding</p>
+        <h3>Skills:</h3>
+        <ul>
+            <li>Programming Languages: Java, Python, JavaScript</li>
+            <li>Web Development: HTML, CSS, React</li>
+            <li>Database Management: MySQL, MongoDB</li>
+            <li>Version Control: Git, GitHub</li>
+        </ul>
+        <h3>Education:</h3>
+        <p>Information Teachnology Branch, Ho Chi Minh University of Nong Lam (2023-2027)</p>
+    </div>
+</div>
+
+<div id="lab" class="tab-content">
+    <h2>Lab Thực Hành</h2>
+    <ul class="lab-list">
+        <li><a href="#" onclick="showLab('lab1')">Lab 1: Giới thiệu</a></li>
+        <li><a href="#" onclick="showLab('lab2')">Lab 2: Cài đặt phần mềm</a></li>
+        <li><a href="#" onclick="showLab('lab3')">Lab 3: Xử lý dữ liệu</a></li>
+        <li><a href="#" onclick="showLab('lab4')">Lab 4: Dự án cuối kỳ</a></li>
+    </ul>
+
+    <div id="lab1" class="lab-tab-content">
+        <h4>Nội Dung Lab 1:</h4>
+        <ul>
+            <li><a href="lab1/lab1.html">Bài tập 1: Thực hiện các phép toán cơ bản với JavaScript.</a></li>
+            <li><a href="bai_tap_2.html">Bài tập 2: Tạo một ứng dụng nhỏ với HTML và CSS.</a></li>
+        </ul>
+    </div>
+    <div id="lab2" class="lab-tab-content">
+        <h4>Nội Dung Lab 2:</h4>
+        <p>Lab 2 sẽ tập trung vào việc cài đặt các phần mềm như Visual Studio Code, Git, và môi trường phát triển Java.</p>
+    </div>
+    <div id="lab3" class="lab-tab-content">
+        <h4>Nội Dung Lab 3:</h4>
+        <p>Trong Lab 3, sinh viên sẽ học cách xử lý dữ liệu sử dụng Python và các thư viện phổ biến.</p>
+    </div>
+    <div id="lab4" class="lab-tab-content">
+        <h4>Nội Dung Lab 4:</h4>
+        <p>Trong Lab 4, sinh viên sẽ thực hiện một dự án cuối kỳ áp dụng các kiến thức đã học.</p>
+    </div>
+</div>
+
+<div id="contact" class="tab-content">
+    <h2>Liên Hệ</h2>
+    <p>Email: khoa@nl.edu.vn</p>
+    <p>Điện thoại: (028) 1234 5678</p>
+    <p>Địa chỉ: 123 Đường ABC, Quận 1, TP. HCM</p>
+</div>
+
+<footer>
+    <p>© 2024 Khoa Công Nghệ Thông Tin - Đại Học Nông Lâm</p>
+</footer>
+
+<script>
+    function showTab(tabId) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => {
+            tab.style.display = 'none'; // Ẩn tất cả các tab
+        });
+        document.getElementById(tabId).style.display = 'block'; // Hiện tab được chọn
+    }
+
+    function showLab(labId) {
+        const labContents = document.querySelectorAll('.lab-tab-content');
+        labContents.forEach(content => {
+            content.style.display = 'none'; // Ẩn tất cả nội dung lab
+        });
+        document.getElementById(labId).style.display = 'block'; // Hiện nội dung lab được chọn
+    }
+
+
+    function init() {
+        showTab('home'); // Hiện tab "Lab"
+    }
+
+    // Gọi hàm khởi tạo khi trang được tải
+    window.onload = init;
+    const contentDiv = document.getElementById('content');
+    
+</script>
+</body>
+</html> 
