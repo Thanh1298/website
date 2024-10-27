@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Môi Trường Lập Trình - Bài Tập</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button {
+            background-color: #28a745;
+            width: 100%; /* Nút quay lại chiếm toàn bộ chiều rộng */
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+
+        .performance, .score {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+
+        #feedback {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Môi Trường Lập Trình - Bài Tập</h2>
+        <h3>Bài Tập: Bài Tập 1</h3>
+        <p>Mô tả: Mô tả ngắn gọn về bài tập 1.</p>
+
+        <label for="language-select">Chọn Ngôn Ngữ:</label>
+        <select id="language-select" onchange="loadSampleCode()">
+            <option value="c">C</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+        </select>
+
+        <textarea id="editor" placeholder="Nhập mã của bạn ở đây..."></textarea>
+        
+        <button onclick="runCode()">Chạy Mã</button>
+        <button onclick="clearCode()">Xóa Mã</button>
+        <button onclick="submitCode()">Gửi Mã</button>
+        <button onclick="retry()">Thử lại</button>
+        <button id="hint-button" onclick="giveHint()">Gợi ý</button>
+
+        <div id="results"></div>
+        <div id="performance" class="performance"></div>
+
+        <div id="feedback">
+            <h4>Để lại phản hồi hoặc yêu cầu trợ giúp:</h4>
+            <textarea id="feedback-text" rows="3" placeholder="Nhập phản hồi của bạn ở đây..."></textarea>
+            <button onclick="submitFeedback()">Gửi Phản Hồi</button>
+        </div>
+
+        <!-- Nút Quay Lại -->
+        <button class="back-button" onclick="goBack()">Quay lại Bảng Điều Khiển</button>
+    </div>
+
+    <script>
+        const testCases = [
+            { input: 5, expected: 25 },
+            { input: 10, expected: 100 }
+        ];
+
+        let hintAvailable = 3; // Số lần gợi ý có sẵn
+
+        function loadSampleCode() {
+            const language = document.getElementById('language-select').value;
+            const editor = document.getElementById('editor');
+
+            if (language === 'c') {
+                editor.value = `#include <stdio.h>
+
+int main() {
+    int input;
+    // Nhập giá trị
+    input = 5; // Thay thế với đầu vào thực tế
+    printf("%d\\n", input * input); // Đầu ra mong đợi: 25
+    return 0;
+}
+                `.trim();
+            } else if (language === 'python') {
+                editor.value = `def calculate_square(input):
+    return input * input
+
+# Thay thế với đầu vào thực tế
+input_value = 5
+print(calculate_square(input_value))  # Đầu ra mong đợi: 25
+                `.trim();
+            } else if (language === 'java') {
+                editor.value = `public class Main {
+    public static void main(String[] args) {
+        int input = 5; // Thay thế với đầu vào thực tế
+        System.out.println(input * input); // Đầu ra mong đợi: 25
+    }
+}
+                `.trim();
+            }
+        }
+
+        function runCode() {
+            const code = document.getElementById('editor').value;
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+            let totalPassed = 0;
+            let executionTime = 0;
+            let memoryUsed = Math.random() * 100; // Giả lập bộ nhớ sử dụng
+
+            // Giới hạn thời gian thực thi
+            const executionLimit = 2000; // 2 giây
+            const startTime = performance.now();
+
+            testCases.forEach((testCase, index) => {
+                let actual;
+                try {
+                    // Kiểm tra thời gian thực thi
+                    if (performance.now() - startTime > executionLimit) {
+                        throw new Error("Vượt quá thời gian thực thi cho test case " + (index + 1));
+                    }
+                    
+                    actual = eval(code.replace('input', testCase.input)); // Thay thế 'input' bằng đầu vào
+                    const status = actual === testCase.expected ? 'Đạt' : 'Không đạt';
+                    const className = status === 'Đạt' ? 'status-success' : 'status-failure';
+                    
+                    executionTime += performance.now() - startTime; // Cập nhật thời gian thực thi
+
+                    if (status === 'Đạt') totalPassed++;
+
+                    resultsDiv.innerHTML += `
+                        <div class="test-case ${className}">
+                            <strong>Test Case ${index + 1}:</strong>
+                            <p>Đầu vào: ${testCase.input}</p>
+                            <p>Đầu ra mong đợi: ${testCase.expected}</p>
+                            <p>Đầu ra thực tế: ${actual}</p>
+                            <p>Trạng thái: ${status}</p>
+                        </div>
+                    `;
+                } catch (error) {
+                    resultsDiv.innerHTML += `
+                        <div class="test-case status-failure">
+                            <strong>Test Case ${index + 1}:</strong>
+                            <p>Đầu vào: ${testCase.input}</p>
+                            <p>Đầu ra mong đợi: ${testCase.expected}</p>
+                            <p>Trạng thái: ${error.message}</p>
+                        </div>
+                    `;
+                }
+            });
+
+            // Hiển thị kết quả
+            const score = (totalPassed / testCases.length) * 100;
+            document.getElementById('performance').innerHTML = `
+                <div class="score">Điểm số: ${score.toFixed(2)}%</div>
+                <div class="performance">Thời gian thực thi: ${executionTime.toFixed(2)} ms</div>
+                <div class="performance">Bộ nhớ đã sử dụng: ${memoryUsed.toFixed(2)} MB</div>
+            `;
+        }
+
+        function clearCode() {
+            document.getElementById('editor').value = '';
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('performance').innerHTML = '';
+        }
+
+        function submitCode() {
+            alert('Mã đã được gửi đi.');
+            // Có thể thêm logic gửi mã đến server ở đây
+        }
+
+        function retry() {
+            clearCode();
+            alert('Bạn có thể thử lại với mã của mình.');
+        }
+
+        function goBack() {
+            window.location.href = 'dashboard.html'; // Trở về bảng điều khiển
+        }
+
+        function submitFeedback() {
+            const feedbackText = document.getElementById('feedback-text').value;
+            if (feedbackText) {
+                alert('Phản hồi của bạn đã được gửi đi.');
+                document.getElementById('feedback-text').value = ''; // Xóa nội dung phản hồi
+            } else {
+                alert('Vui lòng nhập phản hồi trước khi gửi.');
+            }
+        }
+
+        function giveHint() {
+            if (hintAvailable > 0) {
+                alert('Đây là một gợi ý: Bạn có thể kiểm tra kết quả bằng cách so sánh với đầu ra mong đợi.');
+                hintAvailable--;
+                if (hintAvailable === 0) {
+                    document.getElementById('hint-button').style.display = 'none'; // Ẩn nút gợi ý nếu không còn gợi ý
+                }
+            } else {
+                alert('Bạn đã sử dụng hết số lần gợi ý.');
+            }
+        }
+
+        // Tải đoạn mã mẫu đầu tiên khi trang được tải
+        loadSampleCode();
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e9ecef; /* Màu nền tổng thể */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Chiều cao toàn bộ cửa sổ */
+}
+
+.login-container {
+    max-width: 350px; /* Giới hạn chiều rộng của khung */
+    width: 100%; /* Đảm bảo khung chiếm 100% chiều rộng nhỏ hơn */
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Bóng đổ */
+    text-align: center; /* Căn giữa nội dung */
+}
+
+h2 {
+    margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
+    color: #333; /* Màu chữ tiêu đề */
+}
+
+input {
+    width: 100%; /* Chiếm 100% chiều rộng của khung */
+    padding: 10px;
+    margin: 10px 0; /* Khoảng cách trên và dưới */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s; /* Hiệu ứng chuyển tiếp cho viền */
+}
+
+input:focus {
+    border-color: #007bff; /* Màu viền khi có focus */
+    outline: none; /* Tắt viền ngoài */
+}
+
+button {
+    width: 100%; /* Chiếm 100% chiều rộng */
+    padding: 10px;
+    background-color: #007bff; /* Màu nền của nút */
+    color: white;
+    border: none;
+    border-radius: 4px; /* Bo tròn góc */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp */
+}
+
+button:hover {
+    background-color: #0056b3; /* Màu khi hover */
+}
+
+.forgot-password {
+    margin-top: 10px; /* Khoảng cách trên */
+}
+
+.forgot-password a {
+    color: #007bff; /* Màu liên kết */
+    text-decoration: none; /* Tắt gạch chân */
+}
+
+.forgot-password a:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+}

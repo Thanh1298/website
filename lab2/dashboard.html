@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Điều Khiển - Hệ Thống Bài Tập</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .exercises {
+            margin-bottom: 20px;
+        }
+
+        .exercise {
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%; /* Nút chọn bài tập chiếm toàn bộ chiều rộng */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background-color: #28a745; /* Màu xanh cho nút quay lại */
+        }
+
+        .back-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bảng Điều Khiển</h2>
+        
+        <select id="filter" onchange="filterExercises()">
+            <option value="all">Tất cả ngôn ngữ</option>
+            <option value="c">C</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+        </select>
+        
+        <input type="text" id="search" placeholder="Tìm kiếm bài tập..." oninput="searchExercises()">
+        
+        <div class="exercises" id="exerciseList">
+            <div class="exercise" data-language="c">
+                <h3>Bài Tập 1 - C</h3>
+                <p>Mô tả: Tính bình phương của một số.</p>
+                <p>Mức độ khó: Dễ</p>
+                <p>Giới hạn thời gian: 30 phút</p>
+                <button onclick="window.location.href='coding-environment.html';">Chọn Bài Tập</button>
+            </div>
+            <div class="exercise" data-language="python">
+                <h3>Bài Tập 2 - Python</h3>
+                <p>Mô tả: Đếm số ký tự trong chuỗi.</p>
+                <p>Mức độ khó: Trung bình</p>
+                <p>Giới hạn thời gian: 60 phút</p>
+                <button onclick="window.location.href='coding-environment.html';">Chọn Bài Tập</button>
+            </div>
+            <div class="exercise" data-language="java">
+                <h3>Bài Tập 3 - Java</h3>
+                <p>Mô tả: Tính tổng hai số.</p>
+                <p>Mức độ khó: Khó</p>
+                <p>Giới hạn thời gian: 90 phút</p>
+                <button onclick="window.location.href='coding-environment.html';">Chọn Bài Tập</button>
+            </div>
+        </div>
+
+        <!-- Nút Quay Lại -->
+        <button class="back-button" onclick="window.location.href='login.html';">Quay lại</button>
+    </div>
+
+    <script>
+        function filterExercises() {
+            const filter = document.getElementById('filter').value;
+            const exercises = document.querySelectorAll('.exercise');
+            exercises.forEach(exercise => {
+                if (filter === 'all' || exercise.dataset.language === filter) {
+                    exercise.style.display = '';
+                } else {
+                    exercise.style.display = 'none';
+                }
+            });
+        }
+
+        function searchExercises() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const exercises = document.querySelectorAll('.exercise');
+            exercises.forEach(exercise => {
+                const title = exercise.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    exercise.style.display = '';
+                } else {
+                    exercise.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

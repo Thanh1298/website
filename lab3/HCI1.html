@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson Tabs2</title>
+    <link rel="stylesheet" href="style3.css" />
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <div class="sidebar">
+          <h2>Lessons</h2>
+          <ul>
+            <li>
+              <button onclick="openTab(event, 'u_w_u_e_p')">
+                1. Understanding Web UI Elements & Principles
+              </button>
+            </li>
+            <li>
+              <button onclick="openTab(event, 'u_v_e_o_u')">
+                2. Understanding Visual Elements of UI
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="content">
+          <h1>Lessons Content</h1>
+          <div id="u_w_u_e_p" class="tabcontent">
+            <h1>1. Understanding Web UI Elements & Principles</h1>
+            <div class="outer-box">
+              <div class="inner-box">
+                <iframe
+                  src="pdf/Understanding Web UI Elements & Principles.pdf"
+                  frameborder="0"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+          <div id="u_v_e_o_u" class="tabcontent">
+            <h1>2. Understanding Visual Elements of UI</h1>
+            <div class="outer-box">
+              <div class="inner-box">
+                <iframe
+                  src="pdf/Understanding Visual Elements of UI.pdf"
+                  frameborder="0"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <button class="ft" onclick="goToLab3()">Back to list</button>
+      </footer>
+      <script>
+        function openTab(evt, tabName) {
+          var tabcontent = document.getElementsByClassName("tabcontent");
+          for (var i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+          document.getElementById(tabName).style.display = "block";
+          var tablinks = document.querySelectorAll(".sidebar ul li button");
+          tablinks.forEach(function (button) {
+            button.classList.remove("active");
+          });
+          evt.currentTarget.classList.add("active");
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+          var firstButton = document.querySelector(".sidebar ul li button");
+          if (firstButton) {
+            firstButton.click();
+          }
+        });
+        function goToLab3() {
+          window.location.href = "Lab3.html";
+        }
+      </script>
+    </div>
+  </body>
+</html>
