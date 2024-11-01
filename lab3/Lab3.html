@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/e6d841051d.js" crossorigin="anonymous"></script>
+    <title>Lab3</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* Ensure that the position of child elements can be absolute */
+            margin: 0; /* Reset default margin */
+        }
+        .home-button {
+            position: absolute;
+            top: 20px; /* Position from the top */
+            left: 20px; /* Position from the left */
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .home-button:hover {
+            background-color: #555;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 10px;
+            margin: 20px;
+            flex: 1;
+            background-image: url(https://media3.giphy.com/media/U3qYN8S0j3bpK/giphy.webp?cid=790b761136conav066tkccl91o2posqsi8a9pwaq476w7pka&ep=v1_gifs_search&rid=giphy.webp&ct=g);
+        }
+        .grid-item {
+            background-color: blanchedalmond;
+            text-align: center;
+            font-size: 30px;
+            padding: 20px;
+            margin: 10px;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="home-button">Home</a> <!-- Home button added -->
+
+    <header style="text-align: center">
+        <h1>Available Materials</h1>
+    </header>
+
+    <div class="grid-container">
+        <div class="grid-item" onclick="window.location.href='HCI.html'">
+            <i class="fas fa-book fa-2xl" style="color: aqua"></i>
+            <p>Human Computer Interaction</p>
+        </div>
+        <div class="grid-item" onclick="window.location.href='HCI1.html'">
+            <i class="fas fa-book fa-2xl" style="color: aqua"></i>
+            <p>Human Computer Interaction(Continue)</p>
+        </div>
+        <div class="grid-item" onclick="window.location.href='HCI3.html'">
+            <i class="fas fa-book fa-2xl" style="color: aqua"></i>
+            <p>Array</p>
+        </div>
+        <div class="grid-item" onclick="window.location.href='HCI4.html'">
+            <i class="fas fa-book fa-2xl" style="color: aqua"></i>
+            <p>Search and Sort Algorithms</p>
+        </div>
+        <div class="grid-item" onclick="window.location.href='HCI5.html'">
+            <i class="fas fa-book fa-2xl" style="color: aqua"></i>
+            <p>Computer Architecture</p>
+        </div>
+        <div class="grid-item" onclick="window.location.href='HCI6.html'">
+            <i class="fas fa-book fa-2xl" style="color: aqua"></i>
+            <p>Divide And Conquer Algorithms</p>
+        </div>
+    </div>
+    <script></script>
+</body>
+</html>

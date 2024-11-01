@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 1 - Hệ Thống Quản Lý Khóa Học</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/scripts.js"></script>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #f4f4f4;
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab {
+    margin: 0 10px;
+    padding: 10px 15px;
+    background-color: #f4f4f4;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tab.active {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.tab:hover {
+    background-color: #4cae4c;
+    color: white;
+}
+.back-button {
+        display: inline-block;
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    
+    .back-button:hover {
+        background-color: #555;
+    }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Hệ Thống Quản Lý Khóa Học</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#create">Tạo Khóa Học</a></li>
+        <li><a href="#list">Danh Sách Khóa Học</a></li>
+        <li><a href="#lab">Lab</a></li>
+    </ul>
+</nav>
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab('create')">Tạo Khóa Học</div>
+    <div class="tab" onclick="showTab('list')">Danh Sách Khóa Học</div>
+    <div class="tab" onclick="showTab('lab')">Lab</div>
+</div>
+
+<div class="container" id="create">
+    <form id="courseForm" onsubmit="addCourse(event)">
+        <div class="form-group">
+            <label for="courseName">Tên Khóa Học:</label>
+            <input type="text" id="courseName" required maxlength="255">
+        </div>
+        <div class="form-group">
+            <label for="courseDescription">Mô Tả:</label>
+            <textarea id="courseDescription" placeholder="Có thể để trống nếu không có mô tả"></textarea>
+        </div>
+        <div class="form-group dropdown">
+            <label for="createdBy">Giảng Viên:</label>
+            <input type="text" id="createdBy" required placeholder="Chọn giảng viên" onfocus="this.value=''">
+            <div class="dropdown-content"></div>
+        </div>
+        <div class="button-group">
+            <button type="submit">Lưu Khóa Học</button>
+            <button type="button" onclick="createNewCourse()">Tạo Khóa Học Mới</button>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label for="createdAt">Ngày Tạo:</label>
+            <input type="text" id="createdAt" value="" readonly>
+        </div>
+        <div class="form-group" style="display:none;">
+            <label for="updatedAt">Ngày Cập Nhật:</label>
+            <input type="text" id="updatedAt" value="" readonly>
+        </div>
+    </form>
+</div>
+
+<div class="container" id="list" style="display:none;">
+    <h2>Danh Sách Khóa Học</h2>
+    <div id="courseList"></div>
+</div>
+
+<div class="container" id="lab" style="display:none;">
+    <h2>Thông Tin Lab</h2>
+    <p>Hệ thống quản lý khóa học được xây dựng với mục đích cung cấp một nền tảng dễ sử dụng cho giảng viên và sinh viên trong việc quản lý và theo dõi các khóa học.</p>
+
+    <h2>Tính Năng Nổi Bật</h2>
+    <ul>
+        <li>Tạo và quản lý khóa học một cách dễ dàng.</li>
+        <li>Hỗ trợ giảng viên trong việc theo dõi các thông tin khóa học.</li>
+        <li>Cung cấp thông tin chi tiết và phân tích cho người dùng.</li>
+    </ul>
+</div>
+
+<div id="courseDetailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Chi Tiết Khóa Học</h2>
+        <p><strong>Mã Khóa Học:</strong> <span id="modalCourseId"></span></p>
+        <p><strong>Tên Khóa Học:</strong> <span id="modalCourseName"></span></p>
+        <p><strong>Mô Tả:</strong> <span id="modalCourseDescription"></span></p>
+        <p><strong>Giảng Viên:</strong> <span id="modalCreatedBy"></span></p>
+        <p><strong>Ngày Tạo:</strong> <span id="modalCreatedAt"></span></p>
+        <p><strong>Ngày Cập Nhật:</strong> <span id="modalUpdatedAt"></span></p>
+        <div class="button-group">
+            <button onclick="deleteCourse(parseInt(document.getElementById('modalCourseId').innerText))">Xóa Khóa Học</button>
+            <button onclick="editCourse({ id: parseInt(document.getElementById('modalCourseId').innerText), name: document.getElementById('modalCourseName').innerText, description: document.getElementById('modalCourseDescription').innerText, createdBy: document.getElementById('modalCreatedBy').innerText, createdAt: document.getElementById('modalCreatedAt').innerText })">Sửa Khóa Học</button>
+        </div>
+    </div>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="../index.html" class="back-button">Home</a>
+</div>
+
+<script>
+    function showTab(tabId) {
+    const tabs = document.querySelectorAll(".tab");
+    const containers = document.querySelectorAll(".container");
+
+    tabs.forEach(tab => tab.classList.remove("active"));
+    containers.forEach(container => container.style.display = "none");
+
+    document.querySelector(`#${tabId}`).style.display = "block";
+    document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add("active");
+}
+
+function addCourse(event) {
+    event.preventDefault();
+    const courseName = document.getElementById("courseName").value;
+    const courseDescription = document.getElementById("courseDescription").value;
+    const createdBy = document.getElementById("createdBy").value;
+
+    const courseList = document.getElementById("courseList");
+    const courseId = Date.now();
+
+    const courseElement = document.createElement("div");
+    courseElement.className = "course";
+    courseElement.innerHTML = `
+        <h3>${courseName}</h3>
+        <p>${courseDescription}</p>
+        <button onclick="showCourseDetails(${courseId})">Chi Tiết</button>
+    `;
+    courseList.appendChild(courseElement);
+
+    clearForm();
+}
+
+function clearForm() {
+    document.getElementById("courseForm").reset();
+}
+
+function showCourseDetails(courseId) {
+    const modal = document.getElementById("courseDetailsModal");
+    modal.style.display = "block";
+}
+
+function closeModal() {
+    const modal = document.getElementById("courseDetailsModal");
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById("courseDetailsModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+</body>
+</html>

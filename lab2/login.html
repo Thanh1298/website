@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập - Hệ Thống Bài Tập</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Style for the footer */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .back-button {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Đăng Nhập</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Tên người dùng" required>
+            <input type="password" id="password" placeholder="Mật khẩu" required>
+            <button type="submit">Đăng Nhập</button>
+        </form>
+        <div class="forgot-password">
+            <a href="#">Quên mật khẩu?</a>
+        </div>
+    </div>
+
+    <!-- Footer with Home button at the bottom of the page -->
+    <footer>
+        <a href="../index.html" class="back-button">Home</a>
+    </footer>
+
+    <script>
+        // JavaScript xử lý đăng nhập
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn trình duyệt tải lại trang
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Giả lập xác thực thông tin đăng nhập (thay đổi điều kiện khi có backend)
+            if (username === 'student' && password === '1234') {
+                // Chuyển hướng đến trang bảng điều khiển khi đăng nhập thành công
+                window.location.href = 'dashboard.html';
+            } else {
+                // Thông báo nếu đăng nhập không thành công
+                alert('Tên người dùng hoặc mật khẩu không chính xác!');
+            }
+        });
+    </script>
+
+</body>
+</html>
