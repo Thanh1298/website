@@ -1,0 +1,241 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Container will stretch full width */
+.container {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Category bar should be full-width and flexible */
+.category-bar {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 0;
+    width: 100%;
+}
+
+/* Category button default style */
+.category {
+    display: inline-block;
+    padding: 10px 30px;
+    background-color: #e6e5e5; /* White background */
+    color: #000; /* Black text color */
+    border:none;
+    border-radius: 25px; /* Rounded corners */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    margin-right: 10px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.learner-count{
+    font-size: 13px; /* Adjust size as needed */
+    text-transform: lowercase; /* Convert text to lowercase */
+    font-weight: normal; /* Set font weight to normal */
+    margin-left: 0px; /* Optional: add space between the text and the category */
+}
+
+/* Style when button is active (clicked) */
+.category.active {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+}
+
+/* Hover effect */
+.category:hover {
+    background-color: #000; /* Black background on hover */
+    color: #fff; /* White text on hover */
+}
+
+/* Full-width course list */
+.course-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 0;
+}
+
+/* Course card styling */
+.course-card {
+    flex: 1 1 calc(25% - 20px); /* Makes 4 cards per row with a gap */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+    position: relative;
+    transition: transform 0.3s;
+    max-width: 100%;
+    min-width: 250px;
+}
+
+.course-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.category{
+    position: relative; /* Cho phép các phần tử bên trong căn chỉnh tuyệt đối */ 
+}
+
+.course-card {
+    position: relative; /* Cho phép các phần tử bên trong căn chỉnh tuyệt đối */
+}
+
+/* Positioning for arrows in course cards */
+.course-card {
+    position: relative;
+}
+
+.left-arrow, .right-arrow {
+    position: absolute;
+    top: 50%; /* Căn chỉnh chính giữa chiều dọc của ảnh */
+    transform: translateY(-50%); /* Căn chỉnh chính giữa theo chiều dọc */
+    font-size: 24px; /* Kích thước mũi tên */
+    color: #fff; /* Màu của mũi tên */
+    background: #333; /* Nền trắng để nổi bật mũi tên */
+    padding: 10px;
+    border-radius: 50%; /* Tạo hình tròn bao quanh mũi tên */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Đổ bóng cho mũi tên */
+    cursor: pointer; /* Con trỏ khi di chuyển qua mũi tên */
+    text-decoration: none;
+}
+
+.left-arrow {
+    left: -15px;
+}
+
+.right-arrow {
+    right: -15px;
+}
+
+.left-arrow:hover, .right-arrow:hover {
+    color: #555;
+}
+
+.course-card h2 {
+    margin-bottom: 10px; /* Space below the heading */
+  
+}
+
+.course-card p {
+    margin-top: 10px; /* Space above the paragraph */
+    margin-bottom: 0; /* Remove any bottom margin if needed */
+     /* Move text to the right by 10px */
+}
+
+.course-info {
+    text-align: left;
+    padding-left: 40px;
+}
+
+.bestseller {
+    background-color: #ffc107;
+    border: none;
+    color: #333;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    
+}
+/* Popup luôn hiển thị */
+.popup {
+    position: absolute;
+    top: -5%;
+    left: 100%; /* Xuất hiện bên phải thẻ khóa học */
+    width: 110%;
+    height: 110%;
+    margin-left: 20px; /* Khoảng cách giữa thẻ khóa học và popup */
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+.updated-text {
+    color: greenyellow; /* Màu xanh cho từ "Updated" */
+    font-size: 12px;
+}
+
+.updated-date {
+    font-weight: bold; /* In đậm từ "October 2024" */
+    color: green; /* Màu xanh cho từ "October 2024" */
+    font-size: 12px;
+}
+
+.hight{
+    font-size: 12px;
+}
+
+  .course-card:hover .popup {
+    opacity: 1;
+    visibility: visible;
+  }
+  .popup h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .popup p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .popup ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 14px;
+    color: #555;
+  }
+  .popup ul li {
+    margin-bottom: 5px;
+  }
+  .add-to-cart {
+    background-color: #6200ea;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+/* Show all button styling */
+.show-all {
+    display: inline-block;
+    padding: 10px 30px;
+    border: 2px solid #000; /* Black border */
+    background-color: #fff; /* White background */
+    color: #000; /* Black text color */
+    font-weight: bold;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 0; /* Aligns to the left */
+    transition: background-color 0.3s, color 0.3s; /* Hover effect */
+    font-size: 16px;
+}
+
+.show-all:hover {
+    background-color: #000; /* Black background on hover */
+    color: #fff; /* White text on hover */
+}  

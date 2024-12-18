@@ -1,0 +1,78 @@
+/* Basic styles for the page */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+/* 4 Boxes Section */
+.boxes {
+  display: flex;
+  flex-direction: column; /* Arrange boxes in a vertical column */
+  gap: 20px; /* Space between each box */
+}
+
+.box {
+  background-color: #e6e5e5;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  color: #333;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%; /* Căn chỉnh chính giữa chiều dọc của ảnh */
+  left:10px;
+  transform: translateY(-50%); /* Căn chỉnh chính giữa theo chiều dọc */
+  font-size: 24px; /* Kích thước mũi tên */
+  color: #fff; /* Màu của mũi tên */
+  background: #333; /* Nền trắng để nổi bật mũi tên */
+  padding: 10px;
+  border-radius: 50%; /* Tạo hình tròn bao quanh mũi tên */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Đổ bóng cho mũi tên */
+  cursor: pointer; /* Con trỏ khi di chuyển qua mũi tên */
+  text-decoration: none;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%; /* Căn chỉnh chính giữa chiều dọc của ảnh */
+  right:10px;
+  transform: translateY(-50%); /* Căn chỉnh chính giữa theo chiều dọc */
+  font-size: 24px; /* Kích thước mũi tên */
+  color: #fff; /* Màu của mũi tên */
+  background: #333; /* Nền trắng để nổi bật mũi tên */
+  padding: 10px;
+  border-radius: 50%; /* Tạo hình tròn bao quanh mũi tên */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Đổ bóng cho mũi tên */
+  cursor: pointer; /* Con trỏ khi di chuyển qua mũi tên */
+  text-decoration: none;
+}
+
+/* Make boxes responsive on smaller screens */
+@media (max-width: 768px) {
+  .boxes {
+    flex-direction: column; /* Keep 1 column layout on smaller screens */
+  }
+}
