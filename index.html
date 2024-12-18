@@ -24,12 +24,12 @@
             display: flex;
             align-items: center;
             padding: 10px;
-            background-color: rgba(51, 51, 51, 0.8);
+            background-color: rgba(9, 8, 8, 0.8);
             color: white;
         }
 
         .header img {
-            height: 50px;
+            height: 70px;
             margin-right: 10px;
         }
 
@@ -66,32 +66,47 @@
         }
 
         #Home {
-            
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
         }
 
-        .welcome-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-
         .welcome-text {
             font-size: 80px;
-            color: #ecf1f6;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: #000; /* Màu đen */
+            text-shadow: none; /* Loại bỏ bóng chữ nếu không cần thiết */
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 1s ease, transform 1s ease;
         }
 
+            #welcome-text {
+                display: flex;
+                align-items:first baseline;
+                justify-content: center;
+                height: 100%; /* Đảm bảo khung full chiều cao */
+            }
+        
+            .nong-lam {
+                font-size: 1.5em; /* Giảm kích thước chữ */
+                color: red; /* Màu chữ đỏ */
+                font-weight: bold; /* In đậm chữ */
+                margin-top: 20px; /* Tạo khoảng cách giữa "Human Computer Interaction" và "Nong Lam University" */
+                text-align: center; /* Căn giữa chữ */
+                opacity: 0; /* Ban đầu chữ sẽ ẩn */
+                transform: translateY(20px); /* Đưa chữ xuống dưới */
+                transition: opacity 1s ease, transform 1s ease; /* Hiệu ứng từ từ hiện lên */
+            }
+
+            .nong-lam.show {
+                opacity: 1; /* Hiển thị chữ */
+                transform: translateY(0); /* Đưa chữ về vị trí ban đầu */
+            }
+
+
         #About {
-            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20231227/pngtree-celestial-landscape-a-sky-adorned-with-clouds-stars-and-a-paper-image_13917287.png');
+            background-image: url('IMG/about.png');
             background-size: cover;
             background-position: center;
             color: white;
@@ -211,8 +226,7 @@
 </head>
 <body>
     <div class="header">
-        <img src="https://cdn.pixabay.com/photo/2015/11/06/11/43/businessman-1026415_640.jpg" alt="Profile Image">
-        <h1>My Website</h1>
+        <img src="img/hinhanh.jpg" alt="Profile Image">
         <div class="tabs">
             <button class="tablink" onclick="openTab(event, 'Home')">Home</button>
             <button class="tablink" onclick="openTab(event, 'About')">About</button>
@@ -224,12 +238,18 @@
             <button class="tablink" onclick="openTab(event, 'Lab6')">Lab6</button>
         </div>
     </div>
-
     <div id="Home" class="tabcontent">
         <div class="welcome-container">
-            <div class="welcome-text fade-in" id="welcome-text">WELCOME TO <br> MY WEBSITE</div>
+            <div class="welcome-text fade-in" id="welcome-text">
+                Human Computer <br> Interaction
+            </div>
+            <div class="nong-lam fade-in">Nong Lam University</div>
         </div>
     </div>
+    
+    
+    
+    
     <div id="About" class="tabcontent bg-dark text-light py-5">
         <div class="container">
             <!-- Tiêu đề -->
@@ -239,17 +259,18 @@
             <div class="row g-4">
                 <!-- Thông tin cá nhân -->
                 <div class="col-md-6">
-                    <div class="card bg-secondary text-white h-100 fade-in shadow-sm border-0">
+                    <div class="card text-white h-100 fade-in shadow-sm border-0" style="background-color: #ff8c00;">
                         <div class="card-body">
                             <h3 class="card-title">Nguyen Van Thanh</h3>
                             <p class="card-text"><strong>Location:</strong> Ho Chi Minh City</p>
                             <p class="card-text"><strong>Year of Birth:</strong> 2005</p>
+                            <p class="card-text"><strong>Phone number:</strong> 03473255125512</p>
                             <p class="card-text"><strong>Field of Study:</strong> Information Technology at Nong Lam University</p>
                             <p class="card-text"><strong>Career Goal:</strong> To become a programmer and software developer.</p>
                         </div>
                     </div>
                 </div>
-    
+                
                 <!-- Đam mê và sở thích -->
                 <div class="col-md-6">
                     <div class="card bg-secondary text-white h-100 fade-in shadow-sm border-0">
@@ -291,7 +312,7 @@
                 </div>
     
                 <!-- Thời gian rảnh -->
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <div class="card bg-secondary text-white h-100 fade-in shadow-sm border-0">
                         <div class="card-body">
                             <h3 class="card-title">Leisure Time</h3>
@@ -323,7 +344,7 @@
     </div>
     
     <footer>
-        <p>© 2024 My Website. All rights reserved.</p>
+        <p>© 2024 Nguyen Van Thanh. All rights reserved.</p>
     </footer>
     <script>
   function openTab(evt, tabName) {
@@ -375,7 +396,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     openTab(event, 'Home'); // Mở tab Home mặc định
     setTimeout(function() {
-        document.getElementById("welcome-text").classList.add("show"); // Thêm lớp để hiển thị chữ
+        document.getElementById("welcome-text").classList.add("show"); // Thêm lớp để hiển thị chữ "Human Computer Interaction"
+        document.querySelector(".nong-lam").classList.add("show"); // Thêm lớp cho "Nong Lam University" để hiện lên
     }, 500); // Đợi 500ms rồi kích hoạt hiệu ứng
 });
 </script>
