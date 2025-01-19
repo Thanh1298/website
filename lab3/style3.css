@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  height: 100vh;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+footer {
+  height: 60px;
+  text-align: end;
+}
+.ft {
+  font-size: 15px;
+  padding: 5px;
+  background-color: #007bff;
+  color: aliceblue;
+}
+.sidebar {
+  width: 300px;
+  background-image: url(https://media3.giphy.com/media/U3qYN8S0j3bpK/giphy.webp?cid=790b761136conav066tkccl91o2posqsi8a9pwaq476w7pka&ep=v1_gifs_search&rid=giphy.webp&ct=g);
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.sidebar h2 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #fff;
+  text-align: center;
+}
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  background-color: aliceblue;
+}
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+.sidebar ul li button {
+  width: 100%;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  text-align: left;
+  transition: 0.3s;
+  font-size: 16px;
+  background-color: aliceblue;
+}
+.sidebar ul li button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+.sidebar ul li button:hover {
+  background-color: gray;
+}
+.content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.tabcontent {
+  display: none;
+  border: 1px solid #ccc;
+  padding: 0;
+  background-color: #fff;
+  flex: 1;
+  position: relative;
+}
+.outer-box {
+  border: 2px solid white;
+  padding: 5px;
+  margin: 5px;
+  background-color: black;
+  border-radius: 8px;
+  color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.inner-box {
+  border: 1px solid white;
+  padding: 20px;
+  margin: 5px;
+  background-color: #f0f8ff;
+  border-radius: 5px;
+  color: red;
+  height: 60vh;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
